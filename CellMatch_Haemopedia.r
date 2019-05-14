@@ -36,7 +36,7 @@ registerDoParallel(cores=12);
 args = commandArgs(trailingOnly=TRUE);
 if(length(args) != 3)
 {
-   stop("\n\nAll the arguments were not provided.\n\nUser must provide sample name, path to input root directory and path to output directory.\n\nThe code should be run as follows: CellMatch.Haemopedia.190507.r Samplename /path/to/input/dir /path/to/output/dir\n\n")
+   stop("\n\nAll the arguments were not provided.\n\nUser must provide sample name, path to input root directory and path to output directory.\n\nThe code should be run as follows: CellMatch_Haemopedia.r Samplename /path/to/input/dir /path/to/output/dir\n\n")
 }
 
 upn = args[1]; # upn or sample name
@@ -54,7 +54,7 @@ data.10x <- Read10X(matrix.dir);
 
 # Initialize the Seurat object with the raw (non-normalized data)
 print ("Creating Seurat object...")
-scrna <- CreateSeuratObject(counts=data.10x, min.cells=3, min.features=10, project=sprintf("%s.%s",upn,date))
+scrna <- CreateSeuratObject(counts=data.10x, project=sprintf("%s.%s",upn,date))
 
 # Normalize the data
 print ("Normalizing data...")
