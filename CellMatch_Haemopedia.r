@@ -34,7 +34,7 @@ registerDoParallel(cores=12);
 
 # read from command line (see examples below):
 args = commandArgs(trailingOnly=TRUE);
-if(length(args) != 3)
+if(length(args) != 5)
 {
    stop("\n\nAll the arguments were not provided.\n\nUser must provide sample name, path to input root directory and path to output directory.\n\nThe code should be run as follows: CellMatch_Haemopedia.r Samplename /path/to/input/dir /path/to/output/dir\n\n")
 }
@@ -43,6 +43,9 @@ upn = args[1]; # upn or sample name
 matrix.dir = args[2]; # root directory for input
 output.main = args[3]; # path for outputs
 signature.file = "/gscmnt/gc2708/info/medseq/10xGenomics/haemopedia.mouse/lineage_signatures_190415.txt";
+mincell = args[4]
+minfeat = args[5]
+
 
 dir.create(file.path(output.main))
 date = gsub("2019-","19",Sys.Date(),perl=TRUE);
@@ -54,7 +57,12 @@ data.10x <- Read10X(matrix.dir);
 
 # Initialize the Seurat object with the raw (non-normalized data)
 print ("Creating Seurat object...")
-scrna <- CreateSeuratObject(counts=data.10x, project=sprintf("%s.%s",upn,date))
+
+if(mincell>=3 && minfeat>=10){
+ scrna <- CreateSeuratObject(counts=data.10x, min.cells=mincell, min.features=minfeat, project=sprintf("%s.%s",upn,date))
+} else{
+ scrna <- CreateSeuratObject(counts=data.10x, project=sprintf("%s.%s",upn,date))
+}
 
 # Normalize the data
 print ("Normalizing data...")
