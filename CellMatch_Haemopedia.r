@@ -34,7 +34,7 @@ registerDoParallel(cores=12);
 
 # read from command line (see examples below):
 args = commandArgs(trailingOnly=TRUE);
-if(length(args) != 5)
+if(length(args) != 6)
 {
    stop("\n\nAll the arguments were not provided.\n\nUser must provide sample name, path to input root directory and path to output directory.\n\nThe code should be run as follows: CellMatch_Haemopedia.r Samplename /path/to/input/dir /path/to/output/dir\n\n")
 }
@@ -42,9 +42,9 @@ if(length(args) != 5)
 upn = args[1]; # upn or sample name
 matrix.dir = args[2]; # root directory for input
 output.main = args[3]; # path for outputs
-signature.file = "/gscmnt/gc2708/info/medseq/10xGenomics/haemopedia.mouse/lineage_signatures_190415.txt";
-mincell = args[4]
-minfeat = args[5]
+signature.file = args[4]; #path for the lineage dataset
+mincell = args[5]
+minfeat = args[6]
 
 
 dir.create(file.path(output.main))
