@@ -3,7 +3,7 @@ install.packages(c("tidyverse","ggplot2","Hmisc","plotrix","png","gplots","dplyr
 
 #bioconductor packages
 #this is modified from from https://raw.githubusercontent.com/Bioconductor/bioc_docker/master/src/core/install.R.in
-pkgs <- c("bsseq","data.table","methylKit","readr","sqldf","stringr")
+pkgs <- c("bsseq","data.table","methylKit","readr","sqldf","stringr", "scater", "slingshot")
 
 ap.db <- available.packages(contrib.url(BiocManager::repositories()))
 ap <- rownames(ap.db)
